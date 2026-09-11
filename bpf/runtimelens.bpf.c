@@ -209,7 +209,7 @@ int trace_connect(struct trace_event_raw_sys_enter *ctx)
         struct sockaddr_in6_user addr6 = {};
 
         bpf_probe_read_user(&addr6, sizeof(addr6), user_addr);
-        event->dest_port = bpf_ntohs(addr6.sin_port);
+        event->dest_port = bpf_ntohs(addr6.sin6_port);
 #pragma unroll
         for (int i = 0; i < 16; i++)
             event->dest_addr6[i] = addr6.sin6_addr[i];

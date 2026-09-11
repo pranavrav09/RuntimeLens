@@ -15,6 +15,16 @@ typedef __u32 __be32;
 typedef __u32 __wsum;
 typedef _Bool bool;
 
+#define true 1
+#define false 0
+
+enum bpf_map_type {
+    BPF_MAP_TYPE_UNSPEC = 0,
+    BPF_MAP_TYPE_HASH = 1,
+    BPF_MAP_TYPE_ARRAY = 2,
+    BPF_MAP_TYPE_RINGBUF = 27,
+};
+
 struct trace_entry {
     unsigned short type;
     unsigned char flags;

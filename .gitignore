@@ -1,0 +1,8 @@
+bin/
+secure-runner/
+.DS_Store
+coverage.out
+internal/collector/*_bpfel.go
+internal/collector/*_bpfel.o
+internal/collector/*_bpfeb.go
+internal/collector/*_bpfeb.o

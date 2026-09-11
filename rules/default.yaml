@@ -1,0 +1,46 @@
+rules:
+  - id: sensitive_file_access
+    severity: high
+    event: file
+    message: sensitive file access attempted
+    match:
+      path_globs:
+        - /etc/shadow
+        - /etc/sudoers
+        - /root/.ssh/*
+        - /home/*/.ssh/id_*
+
+  - id: unauthorized_connection
+    severity: medium
+    event: connect
+    message: connection to unauthorized or suspicious destination
+    match:
+      dest_ports:
+        - 4444
+        - 1337
+        - 31337
+
+  - id: cloud_metadata_access
+    severity: critical
+    event: connect
+    message: workload attempted to contact a cloud instance metadata service
+    match:
+      dest_ports:
+        - 80
+        - 443
+      dest_cidrs:
+        - 169.254.169.254/32
+
+  - id: reverse_shell_bash
+    severity: critical
+    event: correlation
+    window: 10s
+    message: possible bash reverse shell behavior
+    match:
+      exec_argv_contains:
+        - bash
+        - -i
+      connect_ports:
+        - 4444
+        - 1337
+        - 31337
